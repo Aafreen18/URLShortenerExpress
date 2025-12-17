@@ -1,7 +1,7 @@
 {
   "name": "urlshortener",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000U\u0000R\u0000L\u0000S\u0000h\u0000o\u0000r\u0000t\u0000e\u0000n\u0000e\u0000r\u0000\r\u0000 \u0000",
+  "description": "A simple URL shortener application",
   "main": "app.js",
   "scripts": {
     "dev": "node --watch app.js",
