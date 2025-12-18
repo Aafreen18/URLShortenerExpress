@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,38 +8,27 @@
   <link rel="stylesheet" href="/output.css" />
 </head>
 
-<body
-  class="min-h-screen flex items-center justify-center
+<body class="min-h-screen flex items-center justify-center
          bg-linear-to-br from-(--bg-start) to-(--bg-end)
          relative overflow-hidden">
 
   <!-- Background SVG -->
-  <svg
-    class="absolute top-0 left-0 w-full h-1/3 -z-10
-           animate-[pulse_6s_ease-in-out_infinite]"
-    viewBox="0 0 1440 320"
-    preserveAspectRatio="none">
-    <path
-      fill="#86efac"
-      fill-opacity="0.5"
+  <svg class="absolute top-0 left-0 w-full h-1/3 -z-10
+           animate-[pulse_6s_ease-in-out_infinite]" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <path fill="#86efac" fill-opacity="0.5"
       d="M0,160L80,170.7C160,181,320,203,480,208C640,213,800,203,960,176C1120,149,1280,107,1360,85.3L1440,64L1440,0L0,0Z">
     </path>
   </svg>
 
   <!-- Theme Toggle -->
-  <button
-    id="theme-toggle"
-    type="button"
-    aria-label="Toggle theme"
-    class="absolute top-5 right-5 w-11 h-11 rounded-full
+  <button id="theme-toggle" type="button" aria-label="Toggle theme" class="absolute top-5 right-5 w-11 h-11 rounded-full
            bg-green-500 text-white text-lg
            flex items-center justify-center shadow-md">
     🌙
   </button>
 
   <!-- Card -->
-  <div
-    class="w-[92%] sm:w-105 lg:w-125
+  <div class="w-[92%] sm:w-105 lg:w-125
            rounded-2xl shadow-2xl p-6
            bg-(--card-bg)
            text-(--text-color)">
@@ -51,11 +41,7 @@
     <form action="/" method="post" class="space-y-4">
       <div>
         <label class="block text-sm mb-1">Enter URL</label>
-        <input
-          type="url"
-          name="url"
-          required
-          class="w-full rounded-lg border border-green-300
+        <input type="url" name="url" required class="w-full rounded-lg border border-green-300
                  px-3 py-2 outline-none
                  focus:ring-2 focus:ring-green-400
                  bg-transparent">
@@ -63,20 +49,14 @@
 
       <div>
         <label class="block text-sm mb-1">Enter Short URL</label>
-        <input
-          type="text"
-          name="shortUrl"
-          required
-          class="w-full rounded-lg border border-green-300
+        <input type="text" name="shortUrl" required class="w-full rounded-lg border border-green-300
                  px-3 py-2 outline-none
                  focus:ring-2 focus:ring-green-400
                  bg-transparent">
       </div>
 
       <!-- Submit button -->
-      <button
-        type="submit"
-        class="w-full py-3 rounded-lg
+      <button type="submit" class="w-full py-3 rounded-lg
                bg-green-500 text-white
                hover:bg-green-600 transition">
         Shorten
@@ -85,45 +65,41 @@
 
     <!-- Results -->
     <div class="mt-6 space-y-3">
-      <% for (const shortURL in links) {
-        const originalURL = links[shortURL];
-        const fullShortURL = `${protocol}://${host}/${shortURL}`;
-      %>
+      <% for (const shortURL in links) { const originalURL=links[shortURL]; const
+        fullShortURL=`${protocol}://${host}/${shortURL}`; %>
 
-      <div
-        class="flex flex-col sm:flex-row gap-3
+        <div class="flex flex-col sm:flex-row gap-3
                items-start sm:items-center
                p-3 rounded-lg
                bg-(--muted-bg)">
 
-        <div class="flex-1 min-w-0">
-  <a
+          <div class="flex-1 min-w-0 space-y-1">
+            <a
     href="<%= originalURL %>"
     target="_blank"
-    class="block text-sm break-all whitespace-normal overflow-hidden">
+    class="block text-sm break-all hyphens-auto"
+    style="word-break: break-word; overflow-wrap: anywhere;">
     <%= originalURL %>
   </a>
 
   <a
     href="<%= fullShortURL %>"
     target="_blank"
-    class="block font-semibold text-green-600 break-all whitespace-normal overflow-hidden">
+    class="block font-semibold text-green-600 break-all hyphens-auto"
+    style="word-break: break-word; overflow-wrap: anywhere;">
     <%= fullShortURL %>
   </a>
-</div>
+          </div>
 
 
-        <!-- Copy button -->
-        <button
-          type="button"
-          onclick="copyText('<%= fullShortURL %>')"
-          aria-label="Copy short URL"
-          class="text-xl hover:scale-110 transition">
-          📋
-        </button>
-      </div>
+          <!-- Copy button -->
+          <button type="button" onclick="copyText('<%= fullShortURL %>')" aria-label="Copy short URL"
+            class="text-xl hover:scale-110 transition">
+            📋
+          </button>
+        </div>
 
-      <% } %>
+        <% } %>
     </div>
   </div>
 
@@ -152,4 +128,5 @@
   </script>
 
 </body>
+
 </html>
