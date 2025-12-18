@@ -64,7 +64,12 @@
     </form>
 
     <!-- Results -->
-    <div class="mt-6 space-y-3">
+    <div
+  class="mt-6 space-y-3
+         max-h-[45vh] sm:max-h-[50vh]
+         overflow-y-auto pr-2
+         scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-transparent">
+
       <% for (const shortURL in links) { const originalURL=links[shortURL]; const
         fullShortURL=`${protocol}://${host}/${shortURL}`; %>
 
@@ -74,21 +79,16 @@
                bg-(--muted-bg)">
 
           <div class="flex-1 min-w-0 space-y-1">
-            <a
-    href="<%= originalURL %>"
-    target="_blank"
-    class="block text-sm break-all hyphens-auto"
-    style="word-break: break-word; overflow-wrap: anywhere;">
-    <%= originalURL %>
-  </a>
+            <a href="<%= originalURL %>" target="_blank" class="block text-sm break-all hyphens-auto"
+              style="word-break: break-word; overflow-wrap: anywhere;">
+              <%= originalURL %>
+            </a>
 
-  <a
-    href="<%= fullShortURL %>"
-    target="_blank"
-    class="block font-semibold text-green-600 break-all hyphens-auto"
-    style="word-break: break-word; overflow-wrap: anywhere;">
-    <%= fullShortURL %>
-  </a>
+            <a href="<%= fullShortURL %>" target="_blank"
+              class="block font-semibold text-green-600 break-all hyphens-auto"
+              style="word-break: break-word; overflow-wrap: anywhere;">
+              <%= fullShortURL %>
+            </a>
           </div>
 
 
