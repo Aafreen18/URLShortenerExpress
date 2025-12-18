@@ -96,21 +96,22 @@
                p-3 rounded-lg
                bg-(--muted-bg)">
 
-        <div class="flex-1 min-w-0 overflow-hidden">
+        <div class="flex-1 min-w-0">
   <a
     href="<%= originalURL %>"
     target="_blank"
-    class="block text-sm break-all truncate sm:wrap-break-words">
+    class="block text-sm break-all whitespace-normal overflow-hidden">
     <%= originalURL %>
   </a>
 
   <a
     href="<%= fullShortURL %>"
     target="_blank"
-    class="block font-semibold text-green-600 break-all truncate sm:wrap-break-words">
+    class="block font-semibold text-green-600 break-all whitespace-normal overflow-hidden">
     <%= fullShortURL %>
   </a>
 </div>
+
 
         <!-- Copy button -->
         <button
