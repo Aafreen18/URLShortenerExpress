@@ -1,82 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="/output.css" />
 </head>
 
-<body>
-    <svg class="bg-svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <path fill="#b7f7cc" fill-opacity="0.6"
-            d="M0,160L80,170.7C160,181,320,203,480,208C640,213,800,203,960,176C1120,149,1280,107,1360,85.3L1440,64L1440,0L1360,0L1280,0L1120,0L960,0L800,0L640,0L480,0L320,0L160,0L0,0Z">
-        </path>
-    </svg>
+<body
+  class="min-h-screen flex items-center justify-center
+         bg-linear-to-br from-(--bg-start) to-(--bg-end)
+         relative overflow-hidden">
 
-    <button id="theme-toggle" class="theme-toggle">🌙</button>
+  <!-- Background SVG -->
+  <svg
+    class="absolute top-0 left-0 w-full h-1/3 -z-10
+           animate-[pulse_6s_ease-in-out_infinite]"
+    viewBox="0 0 1440 320"
+    preserveAspectRatio="none">
+    <path
+      fill="#86efac"
+      fill-opacity="0.5"
+      d="M0,160L80,170.7C160,181,320,203,480,208C640,213,800,203,960,176C1120,149,1280,107,1360,85.3L1440,64L1440,0L0,0Z">
+    </path>
+  </svg>
 
-    <div class="container">
-        <h1>🔗 URL Shortener</h1>
+  <!-- Theme Toggle -->
+  <button
+    id="theme-toggle"
+    type="button"
+    aria-label="Toggle theme"
+    class="absolute top-5 right-5 w-11 h-11 rounded-full
+           bg-green-500 text-white text-lg
+           flex items-center justify-center shadow-md">
+    🌙
+  </button>
 
-        <form action="/" method="post">
-            <div class="input-group">
-                <label>Enter URL</label>
-                <input type="url" name="url" id="url" required>
-            </div>
+  <!-- Card -->
+  <div
+    class="w-[92%] sm:w-105 lg:w-125
+           rounded-2xl shadow-2xl p-6
+           bg-(--card-bg)
+           text-(--text-color)">
 
-            <div class="input-group">
-                <label>Enter Short URL</label>
-                <input type="text" name="shortUrl" id="shortUrl" required>
-            </div>
+    <h1 class="text-2xl font-bold text-center mb-6">
+      🔗 URL Shortener
+    </h1>
 
-            <button type="submit">Shorten</button>
-        </form>
-        <div>
-            <% for (const shortURL in links) { const originalURL=links[shortURL]; const
-                fullShortURL=`${protocol}://${host}/${shortURL}`; %>
+    <!-- Form -->
+    <form action="/" method="post" class="space-y-4">
+      <div>
+        <label class="block text-sm mb-1">Enter URL</label>
+        <input
+          type="url"
+          name="url"
+          required
+          class="w-full rounded-lg border border-green-300
+                 px-3 py-2 outline-none
+                 focus:ring-2 focus:ring-green-400
+                 bg-transparent">
+      </div>
 
-                <div class="result-row">
-                    <div class="url-pair">
-                        <a href="<%= originalURL %>" target="_blank" class="url-original">
-                            <%= originalURL %>
-                        </a>
+      <div>
+        <label class="block text-sm mb-1">Enter Short URL</label>
+        <input
+          type="text"
+          name="shortUrl"
+          required
+          class="w-full rounded-lg border border-green-300
+                 px-3 py-2 outline-none
+                 focus:ring-2 focus:ring-green-400
+                 bg-transparent">
+      </div>
 
-                        <span class="arrow">→</span>
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="w-full py-3 rounded-lg
+               bg-green-500 text-white
+               hover:bg-green-600 transition">
+        Shorten
+      </button>
+    </form>
 
-                        <a href="<%= fullShortURL %>" target="_blank" class="url-short">
-                            <%= fullShortURL %>
-                        </a>
-                    </div>
+    <!-- Results -->
+    <div class="mt-6 space-y-3">
+      <% for (const shortURL in links) {
+        const originalURL = links[shortURL];
+        const fullShortURL = `${protocol}://${host}/${shortURL}`;
+      %>
 
-                    <button class="copy-btn" onclick="copyText('<%= fullShortURL %>')">
-                        📋
-                    </button>
-                </div>
+      <div
+        class="flex flex-col sm:flex-row gap-3
+               items-start sm:items-center
+               p-3 rounded-lg
+               bg-(--muted-bg)">
 
-                <% } %>
+        <div class="flex-1 overflow-hidden">
+          <a
+            href="<%= originalURL %>"
+            target="_blank"
+            class="block truncate text-sm">
+            <%= originalURL %>
+          </a>
 
+          <a
+            href="<%= fullShortURL %>"
+            target="_blank"
+            class="block truncate font-semibold text-green-600">
+            <%= fullShortURL %>
+          </a>
         </div>
 
+        <!-- Copy button -->
+        <button
+          type="button"
+          onclick="copyText('<%= fullShortURL %>')"
+          aria-label="Copy short URL"
+          class="text-xl hover:scale-110 transition">
+          📋
+        </button>
+      </div>
+
+      <% } %>
     </div>
+  </div>
 
-    <script>
+  <!-- Script -->
+  <script>
+    const body = document.body;
+    const btn = document.getElementById("theme-toggle");
 
+    // Restore saved theme
+    const savedTheme = localStorage.getItem("theme") || "light";
+    body.dataset.theme = savedTheme;
+    btn.textContent = savedTheme === "dark" ? "🌞" : "🌙";
 
-        const toggleBtn = document.getElementById("theme-toggle");
-        toggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
-            toggleBtn.textContent =
-                document.body.classList.contains("dark") ? "🌞" : "🌙";
-        });
+    btn.addEventListener("click", () => {
+      const next = body.dataset.theme === "dark" ? "light" : "dark";
+      body.dataset.theme = next;
+      localStorage.setItem("theme", next);
+      btn.textContent = next === "dark" ? "🌞" : "🌙";
+    });
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert("Copied to clipboard!");
-        }
+    function copyText(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Copied!"))
+        .catch(() => alert("Copy failed"));
+    }
+  </script>
 
-    </script>
 </body>
-
 </html>

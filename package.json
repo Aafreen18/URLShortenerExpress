@@ -11,16 +11,13 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Aafreen18/URLShortener.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Aafreen18/URLShortener/issues"
-  },
-  "homepage": "https://github.com/Aafreen18/URLShortener#readme",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18"
   }
 }
